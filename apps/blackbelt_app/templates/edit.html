@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show</title>
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css.css' %}">
+    </head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <h4 class="white mr-auto">Edit My Account</h4>
+        <h4 class="white mr-auto"><a href="/quotes" class="white mr-auto">Back</a>
+            </h4>
+        <a href="/logout" class="badge badge-primary">Log out</a>
+    </nav>
+    <br>
+    <div class='row'>
+        <div class='move col-6'>
+            <form action="/myaccount/{{user_info.id}}" method="POST">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message | safe }}
+                    {% endfor %}
+                {% endif %}
+                <div class="form-group">
+                    <label for="ffname">First Name:</label>
+                    <input type="text" id="ffname" name="first_name" class="form-control" value="{{user_info.first_name}}">
+                </div>
+                <div class="form-group">
+                    <label for="llname">Last Name:</label>
+                    <input type="text" id="llname" name="last_name" class="form-control" value={{user_info.last_name}}>
+                </div>
+                <div class="form-group">
+                    <label for="eemail">Email:</label>
+                    <input type="text" id="eemail" name="email" class="form-control" value={{user_info.email}}>
+                </div>
+                <button type="submit" class="btn btn-danger">Update!</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
